@@ -1,0 +1,40 @@
+﻿  red_audio_engine.cpp
+  red_camera.cpp
+  red_collision_detection.cpp
+  red_config.cpp
+  red_debug_text.cpp
+  red_enemy.cpp
+  red_engine.cpp
+  red_game.cpp
+  red_hud.cpp
+  red_level.cpp
+  red_main.cpp
+  red_math.cpp
+  red_model.cpp
+  red_physics_engine.cpp
+  red_player.cpp
+  red_renderer.cpp
+  red_shader.cpp
+  red_sound.cpp
+  red_texture.cpp
+  red_time.cpp
+  Generating Code...
+  Compiling...
+  red_ui_manager.cpp
+  red_weapon.cpp
+  Generating Code...
+red_main.obj : error LNK2019: unresolved external symbol __imp_glEnable referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol __imp_glViewport referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwWindowHint referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwCreateWindow referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwWindowShouldClose referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwSetWindowShouldClose referenced in function "void __cdecl KeyCallback(struct GLFWwindow *,int,int,int,int)" (?KeyCallback@@YAXPEAUGLFWwindow@@HHHH@Z)
+red_main.obj : error LNK2019: unresolved external symbol glfwPollEvents referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwSetKeyCallback referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwMakeContextCurrent referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol glfwSwapBuffers referenced in function main
+red_main.obj : error LNK2019: unresolved external symbol __imp_glewExperimental referenced in function main
+R:\Source\Red_FPS\Red_OpenGL\x64\Debug\Red_OpenGL.exe : fatal error LNK1120: 14 unresolved externals

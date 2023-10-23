@@ -70,6 +70,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>R:\Source\Red_FPS\glfw-3.3.8\include;R:\Source\Red_FPS\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>R:\Source\Red_FPS\glew-2.1.0\lib;$(LibraryPath)</LibraryPath>
+    <SourcePath>R:\Source\Red_FPS\glew-2.1.0\src;R:\Source\Red_FPS\glfw-3.3.8\src;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -149,6 +154,10 @@
     <ClCompile Include="red_time.cpp" />
     <ClCompile Include="red_ui_manager.cpp" />
     <ClCompile Include="red_weapon.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="red_camera.h" />
+    <ClInclude Include="red_renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
