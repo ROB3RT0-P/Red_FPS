@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glew.h>
+#include <glew>
 #include <glfw3.h>
 #include <glm.h>
 #include <matrix_transform.h>

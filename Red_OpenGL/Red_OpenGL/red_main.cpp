@@ -2,8 +2,8 @@
 // red_main - RJP - 22/10/2023
 //----------------------------
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <GLEW/src/glew.h>
+#include <GLFW/include/GLFW/glfw3.h>
 #include <iostream>
 
 // GLFW window and input callbacks

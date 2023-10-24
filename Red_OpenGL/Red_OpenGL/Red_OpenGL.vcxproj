@@ -71,7 +71,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>R:\Source\Red_FPS\glfw-3.3.8\include;R:\Source\Red_FPS\glew-2.1.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;R:\Source\Red_FPS\Red_OpenGL\GLEW\include;$(IncludePath)</IncludePath>
     <LibraryPath>R:\Source\Red_FPS\glew-2.1.0\lib;$(LibraryPath)</LibraryPath>
     <SourcePath>R:\Source\Red_FPS\glew-2.1.0\src;R:\Source\Red_FPS\glfw-3.3.8\src;$(SourcePath)</SourcePath>
   </PropertyGroup>

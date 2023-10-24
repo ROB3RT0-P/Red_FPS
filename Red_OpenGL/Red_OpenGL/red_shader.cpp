@@ -55,8 +55,6 @@ void Shader::SetUniform(const std::string& name, const glm::mat4& matrix) const 
     glUniformMatrix4fv(glGetUniformLocation(programID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
 }
 
-// Add more SetUniform overloads as needed
-
 void Shader::CheckCompileErrors(GLuint shader, const std::string& type) const {
     GLint success;
     GLchar infoLog[1024];

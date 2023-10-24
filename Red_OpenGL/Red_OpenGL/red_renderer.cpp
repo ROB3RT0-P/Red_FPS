@@ -3,7 +3,6 @@
 
 Renderer::Renderer(int screenWidth, int screenHeight)
     : screenWidth(screenWidth), screenHeight(screenHeight), window(nullptr), camera(nullptr) {
-    // Initialize other member variables as needed
 }
 
 Renderer::~Renderer() {
@@ -40,7 +39,7 @@ bool Renderer::Initialize() {
         return false;
     }
 
-    // Initialize other resources like models and textures
+    // Initialize models and textures here
 
     return true;
 }
@@ -56,7 +55,7 @@ void Renderer::Render() {
         shader.SetUniform("projection", camera->GetProjectionMatrix());
     }
 
-    // Render your game objects, models, and world here
+    // Render game objects, models, and world here
 
     // Swap buffers
     glfwSwapBuffers(window);
@@ -64,8 +63,6 @@ void Renderer::Render() {
 }
 
 void Renderer::Cleanup() {
-    // Release OpenGL resources and terminate GLFW
-    // Release models, textures, and other resources
 
     if (window) {
         glfwDestroyWindow(window);
