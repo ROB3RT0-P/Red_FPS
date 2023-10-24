@@ -1,26 +1,23 @@
 #pragma once
 
-#include <glew>
-#include <glfw3.h>
-#include <glm.h>
-#include <matrix_transform.h>
+#include "red_includes.h"
 
 class Camera {
 public:
-    Camera(GLFWwindow* window, GLfloat screenWidth, GLfloat screenHeight, glm::vec3 initialPosition = glm::vec3(0.0f, 0.0f, 0.0f));
+    Camera(GLFWwindow* window, GLfloat screenWidth, GLfloat screenHeight, Vec3 initialPosition);
     
     void ProcessKeyboard(GLfloat deltaTime);
     void ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch = true);
 
-    glm::mat4 GetViewMatrix() const;
-    glm::mat4 GetProjectionMatrix() const;
+    Mat4 GetViewMatrix() const;
+    Mat4 GetProjectionMatrix() const;
 
 private:
-    glm::vec3 position;
-    glm::vec3 front;
-    glm::vec3 up;
-    glm::vec3 right;
-    glm::vec3 worldUp;
+    Vec3 position;
+    Vec3 front;
+    Vec3 up;
+    Vec3 right;
+    Vec3 worldUp;
 
     GLfloat yaw;
     GLfloat pitch;

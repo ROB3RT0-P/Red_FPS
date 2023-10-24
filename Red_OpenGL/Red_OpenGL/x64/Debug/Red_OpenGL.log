@@ -1,40 +1,48 @@
-﻿  red_audio_engine.cpp
-  red_camera.cpp
-  red_collision_detection.cpp
-  red_config.cpp
-  red_debug_text.cpp
-  red_enemy.cpp
-  red_engine.cpp
-  red_game.cpp
-  red_hud.cpp
-  red_level.cpp
-  red_main.cpp
-  red_math.cpp
-  red_model.cpp
-  red_physics_engine.cpp
-  red_player.cpp
+﻿  red_camera.cpp
   red_renderer.cpp
-  red_shader.cpp
-  red_sound.cpp
-  red_texture.cpp
-  red_time.cpp
-  Generating Code...
-  Compiling...
-  red_ui_manager.cpp
-  red_weapon.cpp
   Generating Code...
 red_main.obj : error LNK2019: unresolved external symbol __imp_glEnable referenced in function main
 red_main.obj : error LNK2019: unresolved external symbol __imp_glViewport referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol __imp_glViewport
 red_main.obj : error LNK2019: unresolved external symbol __imp_glewInit referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol __imp_glewInit
 red_main.obj : error LNK2019: unresolved external symbol glfwInit referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwInit
 red_main.obj : error LNK2019: unresolved external symbol glfwTerminate referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwTerminate
 red_main.obj : error LNK2019: unresolved external symbol glfwWindowHint referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwWindowHint
 red_main.obj : error LNK2019: unresolved external symbol glfwCreateWindow referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwCreateWindow
 red_main.obj : error LNK2019: unresolved external symbol glfwWindowShouldClose referenced in function main
 red_main.obj : error LNK2019: unresolved external symbol glfwSetWindowShouldClose referenced in function "void __cdecl KeyCallback(struct GLFWwindow *,int,int,int,int)" (?KeyCallback@@YAXPEAUGLFWwindow@@HHHH@Z)
 red_main.obj : error LNK2019: unresolved external symbol glfwPollEvents referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwPollEvents
 red_main.obj : error LNK2019: unresolved external symbol glfwSetKeyCallback referenced in function main
 red_main.obj : error LNK2019: unresolved external symbol glfwMakeContextCurrent referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwMakeContextCurrent
 red_main.obj : error LNK2019: unresolved external symbol glfwSwapBuffers referenced in function main
+red_renderer.obj : error LNK2001: unresolved external symbol glfwSwapBuffers
 red_main.obj : error LNK2019: unresolved external symbol __imp_glewExperimental referenced in function main
-R:\Source\Red_FPS\Red_OpenGL\x64\Debug\Red_OpenGL.exe : fatal error LNK1120: 14 unresolved externals
+red_math.obj : error LNK2019: unresolved external symbol "struct Vec3 __cdecl Math::Cross(struct Vec3 const &,struct Vec3 const &)" (?Cross@Math@@YA?AUVec3@@AEBU2@0@Z) referenced in function "struct Mat4 __cdecl Math::LookAt(struct Vec3 const &,struct Vec3 const &,struct Vec3 const &)" (?LookAt@Math@@YA?AUMat4@@AEBUVec3@@00@Z)
+red_math.obj : error LNK2019: unresolved external symbol "struct Mat4 __cdecl Math::Identity(void)" (?Identity@Math@@YA?AUMat4@@XZ) referenced in function "struct Mat4 __cdecl Math::Rotate(struct Mat4 const &,float,struct Vec3 const &)" (?Rotate@Math@@YA?AUMat4@@AEBU2@MAEBUVec3@@@Z)
+red_renderer.obj : error LNK2019: unresolved external symbol __imp_glClear referenced in function "public: void __cdecl Renderer::Render(void)" (?Render@Renderer@@QEAAXXZ)
+red_renderer.obj : error LNK2019: unresolved external symbol glfwDestroyWindow referenced in function "public: void __cdecl Renderer::Cleanup(void)" (?Cleanup@Renderer@@QEAAXXZ)
+red_renderer.obj : error LNK2019: unresolved external symbol "public: void __cdecl Shader::SetUniform(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,struct Mat4 const &)const " (?SetUniform@Shader@@QEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AEBUMat4@@@Z) referenced in function "public: void __cdecl Renderer::Render(void)" (?Render@Renderer@@QEAAXXZ)
+red_renderer.obj : error LNK2019: unresolved external symbol "public: struct Mat4 __cdecl Camera::GetViewMatrix(void)const " (?GetViewMatrix@Camera@@QEBA?AUMat4@@XZ) referenced in function "public: void __cdecl Renderer::Render(void)" (?Render@Renderer@@QEAAXXZ)
+red_renderer.obj : error LNK2019: unresolved external symbol "public: struct Mat4 __cdecl Camera::GetProjectionMatrix(void)const " (?GetProjectionMatrix@Camera@@QEBA?AUMat4@@XZ) referenced in function "public: void __cdecl Renderer::Render(void)" (?Render@Renderer@@QEAAXXZ)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewAttachShader referenced in function "public: bool __cdecl Shader::Load(char const *,char const *)" (?Load@Shader@@QEAA_NPEBD0@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewCreateProgram referenced in function "public: bool __cdecl Shader::Load(char const *,char const *)" (?Load@Shader@@QEAA_NPEBD0@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewCreateShader referenced in function "public: bool __cdecl Shader::Load(char const *,char const *)" (?Load@Shader@@QEAA_NPEBD0@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewDeleteProgram referenced in function "public: __cdecl Shader::~Shader(void)" (??1Shader@@QEAA@XZ)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewDeleteShader referenced in function "public: bool __cdecl Shader::Load(char const *,char const *)" (?Load@Shader@@QEAA_NPEBD0@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewGetProgramInfoLog referenced in function "private: void __cdecl Shader::CheckCompileErrors(unsigned int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)const " (?CheckCompileErrors@Shader@@AEBAXIAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewGetProgramiv referenced in function "private: void __cdecl Shader::CheckCompileErrors(unsigned int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)const " (?CheckCompileErrors@Shader@@AEBAXIAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewGetShaderInfoLog referenced in function "private: void __cdecl Shader::CheckCompileErrors(unsigned int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)const " (?CheckCompileErrors@Shader@@AEBAXIAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewGetShaderiv referenced in function "private: void __cdecl Shader::CheckCompileErrors(unsigned int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)const " (?CheckCompileErrors@Shader@@AEBAXIAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewGetUniformLocation referenced in function "public: void __cdecl Shader::SetUniform(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)const " (?SetUniform@Shader@@QEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewLinkProgram referenced in function "public: bool __cdecl Shader::Load(char const *,char const *)" (?Load@Shader@@QEAA_NPEBD0@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewUniform1f referenced in function "public: void __cdecl Shader::SetUniform(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,float)const " (?SetUniform@Shader@@QEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@M@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewUniform1i referenced in function "public: void __cdecl Shader::SetUniform(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,int)const " (?SetUniform@Shader@@QEBAXAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z)
+red_shader.obj : error LNK2019: unresolved external symbol __imp___glewUseProgram referenced in function "public: void __cdecl Shader::Use(void)const " (?Use@Shader@@QEBAXXZ)
+R:\Source\Red_FPS\Red_OpenGL\x64\Debug\Red_OpenGL.exe : fatal error LNK1120: 35 unresolved externals

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <GLEW/glew.h>
+#include "red_includes.h"
 #include <string>
 
 class Shader {
@@ -14,8 +14,7 @@ public:
 
     void SetUniform(const std::string& name, int value) const;
     void SetUniform(const std::string& name, float value) const;
-    void SetUniform(const std::string& name, const glm::mat4& matrix) const;
-    // Add more SetUniform overloads as needed
+    void SetUniform(const std::string& name, const Mat4& matrix) const;
 
 private:
     GLuint programID;

@@ -1,7 +1,6 @@
 #pragma once
 
-#include <GLEW/glew.h>
-#include <GLFW/glfw3.h>
+#include "red_includes.h"
 #include "red_shader.h"
 #include "red_camera.h"
 
