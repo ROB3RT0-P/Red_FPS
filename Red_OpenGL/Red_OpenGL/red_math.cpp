@@ -77,7 +77,7 @@ namespace Math {
 
 
 
-	Mat4 Scale(const Mat4 matrix, const Vec3& scale)
+	Mat4 Scale(const Mat4& matrix, const Vec3& scale)
 	{
 		Mat4 result;
 		
@@ -154,6 +154,25 @@ namespace Math {
 	{
 		Vec3 result = { vector.x * scalar, vector.y * scalar, vector.z * scalar };
 		
+		return result;
+	}
+
+	Mat4 Identity()
+	{
+		Mat4 result;
+
+		 
+		return result;
+	}
+
+	Vec3 Cross(const Vec3& a, const Vec3& b)
+	{
+		Vec3 result;
+
+		result.x = a.y * b.z - a.z * b.y;
+		result.y = a.z * b.x - a.x * b.z;
+		result.z = a.x * b.y - a.y * b.x;
+
 		return result;
 	}
 }

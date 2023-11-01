@@ -71,9 +71,15 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;R:\Source\Red_FPS\Red_OpenGL\GLEW\include;$(IncludePath)</IncludePath>
-    <LibraryPath>R:\Source\Red_FPS\Red_OpenGL\GLEW\lib;$(LibraryPath)</LibraryPath>
-    <SourcePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\src;R:\Source\Red_FPS\Red_OpenGL\GLEW\src;$(SourcePath)</SourcePath>
+    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN64\glfw-3.3.8.bin.WIN64\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <SourcePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\src;$(SourcePath)</SourcePath>
+    <ExternalIncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;$(ExternalIncludePath)</ExternalIncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;$(IncludePath)</IncludePath>
+    <SourcePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\src;$(SourcePath)</SourcePath>
+    <LibraryPath>R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN32\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,10 +87,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN32\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;R:\Source\Red_FPS\Red_OpenGL\GLEW\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,12 +167,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glew.h" />
-    <ClInclude Include="glm.h" />
-    <ClInclude Include="Math\glm.hpp" />
+    <ClInclude Include="glfw3.h" />
     <ClInclude Include="red_camera.h" />
     <ClInclude Include="red_includes.h" />
     <ClInclude Include="red_math.h" />
     <ClInclude Include="red_renderer.h" />
+    <ClInclude Include="red_shader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -122,14 +122,14 @@
     <ClInclude Include="glew.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="glm.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Math\glm.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="red_math.h">
       <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="red_shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="glfw3.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
