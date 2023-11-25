@@ -1,3 +1,7 @@
+/*******************************************
+    Written by Robert Parry [RJP] - 2023    
+*******************************************/
+
 #include "red_input.h"
 
 Input::Input(GLFWwindow* window, Camera& camera)

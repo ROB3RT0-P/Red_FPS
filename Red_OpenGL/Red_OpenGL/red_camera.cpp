@@ -1,3 +1,7 @@
+/*******************************************
+    Written by Robert Parry [RJP] - 2023    
+*******************************************/
+
 #include "red_camera.h"
 
 Camera::Camera(Vec3 position, Vec3 up, float yaw, float pitch)

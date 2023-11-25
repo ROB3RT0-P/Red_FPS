@@ -1,3 +1,7 @@
+/*******************************************
+    Written by Robert Parry [RJP] - 2023    
+*******************************************/
+
 #include "red_renderer.h"
 
 Renderer::Renderer(int screenWidth, int screenHeight)

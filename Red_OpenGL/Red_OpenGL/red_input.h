@@ -1,3 +1,7 @@
+/*******************************************
+    Written by Robert Parry [RJP] - 2023    
+*******************************************/
+
 #pragma once
 
 #include "red_includes.h"
