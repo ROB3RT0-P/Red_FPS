@@ -1,4 +1,5 @@
 Red FPS - Doom-style game using OpenGL
+
 Copyright (c) Robert Parry - 2023
 
 This software is provided 'as-is', without any express or implied
