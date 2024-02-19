@@ -10,17 +10,14 @@
 
 class Input {
 public:
-    Input(GLFWwindow* window, Camera& camera);
-    void ProcessInput(float deltaTime);
+    static bool keys[1024];
+    static GLfloat lastX;
+    static GLfloat lastY;
+    static bool firstMouse;
 
-private:
-    GLFWwindow* window;
-    Camera& camera;
-
-    bool firstMouse;
-    float lastX;
-    float lastY;
-
-    static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
-    static void MouseCallback(GLFWwindow* window, double xpos, double ypos);
+    static void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode);
+    static void mouseCallback(GLFWwindow* window, double xPos, double yPos, Camera& camera);
+    static void setMouseCallback(GLFWwindow* window, Camera& camera);
+    static void scrollCallBack(GLFWwindow* window, double xOffset, double yOffset, Camera& camera);
+    static void exeMovement(Camera& camera, float deltaTime);
 };

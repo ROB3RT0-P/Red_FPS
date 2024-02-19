@@ -7,15 +7,23 @@
 
 #include <cmath>
 
-struct Vec3 {
-	float x, y, z;
-};
+namespace Math 
+{
+	struct Vec3 
+	{
+		float x, y, z;
 
-struct Mat4 {
-	float data[16];
-};
+		Vec3() : x(0.0f), y(0.0f), z(0.0f) {}
 
-namespace Math {
+		Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
+	};
+
+	struct Mat4 
+	{
+		float data[16];
+	};
+
+
 	float ToRadians(float degrees);
 	Vec3 Normalise(const Vec3& vector);
 	Vec3 Cross(const Vec3& a, const Vec3& b);

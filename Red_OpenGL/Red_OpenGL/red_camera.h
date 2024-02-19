@@ -1,38 +1,37 @@
 /*******************************************
-    Written by Robert Parry [RJP] - 2023    
+    Written by Robert Parry [RJP] - 2024    
     Refer to red_main.cpp for the license
 *******************************************/
 
 #pragma once
 
-#include "red_math.h"
+#include "red_includes.h"
 
-class Camera {
+class Camera
+{
 public:
-    Camera(Vec3 position, Vec3 up, float yaw, float pitch);
-    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch);
+	Camera(Math::Vec3 pos = Math::Vec3(0.0f, 0.0f, 3.0f), Math::Vec3 up = Math::Vec3(0.0f, 1.0f, 0.0f), float yaw = -90.0f, float pitch = 0.0f);
 
-    Mat4 GetViewMatrix() const;
-    void ProcessKeyboard(int direction, float deltaTime);
-    void ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch = true);
-    void ProcessMouseScroll(float yoffset);
-
-    float GetZoom() const { return zoom; }
-    Vec3 GetPosition() const { return position; }
-    Vec3 GetFront() const { return front; }
+	Math::Mat4 getViewMatrix();
+	void processKeyboard(int direction, float deltaTime);
+	void processMouseMovement(float xOffset, float yOffset, GLboolean constrainPitch = true);
+	void processMouseScroll(float yOffset);
 
 private:
-    void UpdateCameraVectors();
+	const float Speed_ = 2.5f;
+	const float Sensitivity_ = 0.1f;
+	const float Zoom_ = 45.f;
+	float yaw_;
+	float pitch_;
+	float movementSpeed_;
+	float mouseSensitivity_;
+	float zoom_;
+	Math::Vec3 position_;
+	Math::Vec3 front_;
+	Math::Vec3 up_;
+	Math::Vec3 right_;
+	Math::Vec3 worldUp_;
 
-    Vec3 position;
-    Vec3 up;
-    Vec3 front;
-    Vec3 right;
-    Vec3 worldUp;
+	void updateCameraVectors();
 
-    float yaw;
-    float pitch;
-    float movementSpeed;
-    float mouseSensitivity;
-    float zoom;
 };

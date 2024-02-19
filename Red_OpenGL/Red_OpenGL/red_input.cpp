@@ -4,56 +4,68 @@
 *******************************************/
 
 #include "red_input.h"
+#include "red_camera.h"
+#include <iostream>
 
-Input::Input(GLFWwindow* window, Camera& camera)
-    : window(window), camera(camera), firstMouse(true), lastX(400.0f), lastY(300.0f) {
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSetKeyCallback(window, KeyCallback);
-    glfwSetCursorPosCallback(window, MouseCallback);
+bool Input::keys[1024];
+GLfloat Input::lastX = 400, Input::lastY = 300;
+bool Input::firstMouse = true;
+
+void Input::keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
+{
+    if (action == GLFW_PRESS)
+        keys[key] = true;
+    else if (action == GLFW_RELEASE)
+        keys[key] = false;
 }
 
-void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mode) {
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
-        glfwSetWindowShouldClose(window, GL_TRUE);
+void Input::mouseCallback(GLFWwindow* window, double xPos, double yPos, Camera& camera)
+{
+    if (firstMouse)
+    {
+        lastX = xPos;
+        lastY = yPos;
     }
 
-    if (action == GLFW_REPEAT) return;
+    GLfloat xOffset = xPos - lastX;
+    GLfloat yOffset = lastY - yPos;
 
-    if (key >= 0 && key < 1024) {
-        if (action == GLFW_PRESS) {
-            camera.Keys[key] = true;
-        } else if (action == GLFW_RELEASE) {
-            camera.Keys[key] = false;
-        }
-    }
+    lastX = xPos;
+    lastY = yPos;
+
+    camera.processMouseMovement(xOffset, yOffset);
 }
 
-void Input::MouseCallback(GLFWwindow* window, double xpos, double ypos) {
-    if (firstMouse) {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
 
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos;
-    lastX = xpos;
-    lastY = ypos;
-
-    camera.ProcessMouseMovement(xoffset, yoffset);
+void Input::scrollCallBack(GLFWwindow* window, double xOffset, double yOffset, Camera& camera)
+{
+    camera.processMouseScroll(yOffset);
 }
 
-void Input::ProcessInput(float deltaTime) {
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+
+void Input::exeMovement(Camera& camera, float deltaTime)
+{
+    if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
+    {
+        camera.processKeyboard(GLFW_KEY_W, deltaTime);
+        std::cout << "Up";
     }
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
+
+    if (keys[GLFW_KEY_S] || keys[GLFW_KEY_DOWN])
+    {
+        camera.processKeyboard(GLFW_KEY_S, deltaTime);
+        std::cout << "Down";
     }
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) {
-        camera.ProcessKeyboard(LEFT, deltaTime);
+
+    if (keys[GLFW_KEY_A] || keys[GLFW_KEY_LEFT])
+    {
+        camera.processKeyboard(GLFW_KEY_A, deltaTime);
+        std::cout << "Left";
     }
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) {
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+
+    if (keys[GLFW_KEY_D] || keys[GLFW_KEY_RIGHT])
+    {
+        camera.processKeyboard(GLFW_KEY_D, deltaTime);
+        std::cout << "Right";
     }
 }

@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Debug">
       <UniqueIdentifier>{f479b4f4-db3b-4048-8db1-08b01ac915bb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Shaders">
+      <UniqueIdentifier>{671593b0-8f49-44a0-9402-65d1fddfbf44}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="red_camera.cpp">
@@ -108,6 +111,9 @@
     <ClCompile Include="red_debug_text.cpp">
       <Filter>Source Files\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="red_input.cpp">
+      <Filter>Source Files\Physics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="red_camera.h">
@@ -131,5 +137,19 @@
     <ClInclude Include="glfw3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="red_input.h">
+      <Filter>Source Files\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="red_game.h">
+      <Filter>Source Files\Logic</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\red_fragment_shader.glsl">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
+    <None Include="Shaders\red_vertex_shader.glsl">
+      <Filter>Source Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

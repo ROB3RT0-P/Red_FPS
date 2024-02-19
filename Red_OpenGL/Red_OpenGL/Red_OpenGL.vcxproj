@@ -77,9 +77,9 @@
     <ExternalIncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;$(IncludePath)</IncludePath>
+    <IncludePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\include;R:\Source\Red_FPS\Red_OpenGL\GLEW\include;$(IncludePath)</IncludePath>
     <SourcePath>R:\Source\Red_FPS\Red_OpenGL\GLFW\src;$(SourcePath)</SourcePath>
-    <LibraryPath>R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN32\lib-vc2022;$(LibraryPath)</LibraryPath>
+    <LibraryPath>R:\Source\Red_FPS\Red_OpenGL\GLEW\lib\Release\Win32;R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN32\lib-vc2022;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -93,7 +93,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>R:\Source\Red_FPS\Red_OpenGL\GLFW\glfw-3.3.8.bin.WIN32\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>MSVCRT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,6 +152,7 @@
     <ClCompile Include="red_engine.cpp" />
     <ClCompile Include="red_game.cpp" />
     <ClCompile Include="red_hud.cpp" />
+    <ClCompile Include="red_input.cpp" />
     <ClCompile Include="red_level.cpp" />
     <ClCompile Include="red_main.cpp" />
     <ClCompile Include="red_math.cpp" />
@@ -166,13 +168,19 @@
     <ClCompile Include="red_weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="red_game.h" />
     <ClInclude Include="glew.h" />
     <ClInclude Include="glfw3.h" />
     <ClInclude Include="red_camera.h" />
     <ClInclude Include="red_includes.h" />
+    <ClInclude Include="red_input.h" />
     <ClInclude Include="red_math.h" />
     <ClInclude Include="red_renderer.h" />
     <ClInclude Include="red_shader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\red_fragment_shader.glsl" />
+    <None Include="Shaders\red_vertex_shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

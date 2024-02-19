@@ -1,83 +1,91 @@
 /*******************************************
-	Written by Robert Parry [RJP] - 2023
+	Written by Robert Parry [RJP] - 2024
 	Refer to red_main.cpp for the license
 *******************************************/
 
 #include "red_camera.h"
 
-Camera::Camera(Vec3 position, Vec3 up, float yaw, float pitch)
-    : front(Vec3(0.0f, 0.0f, -1.0f)), yaw(yaw), pitch(pitch), movementSpeed(2.5f), mouseSensitivity(0.1f), zoom(45.0f) {
-    this->position = position;
-    this->up = up;
-    worldUp = Vec3(0.0f, 1.0f, 0.0f);
-    UpdateCameraVectors();
+Camera::Camera(Math::Vec3 position, Math::Vec3 up, float yaw, float pitch)
+    : front_({ 0.0f, 0.0f, -1.0f }), movementSpeed_(Speed_), mouseSensitivity_(Sensitivity_),
+    zoom_(Zoom_), position_(position), worldUp_(up), yaw_(yaw), pitch_(pitch) {
+    updateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
-    : front(Vec3(0.0f, 0.0f, -1.0f)), yaw(yaw), pitch(pitch), movementSpeed(2.5f), mouseSensitivity(0.1f), zoom(45.0f) {
-    position = Vec3(posX, posY, posZ);
-    up = Vec3(upX, upY, upZ);
-    worldUp = Vec3(0.0f, 1.0f, 0.0f);
-    UpdateCameraVectors();
+Math::Mat4 Camera::getViewMatrix() {
+    Math::Vec3 center = Math::Add(position_, front_);
+    Math::Vec3 up = up_;
+
+    Math::Vec3 z = Math::Normalise(Math::Subtract(position_, center));
+    Math::Vec3 x = Math::Normalise(Math::Cross(up, z));
+    Math::Vec3 y = Math::Cross(z, x);
+
+    Math::Mat4 viewMatrix;
+
+    viewMatrix.data[0] = x.x;
+    viewMatrix.data[1] = y.x;
+    viewMatrix.data[2] = -z.x;
+    viewMatrix.data[3] = 0.0f;
+
+    viewMatrix.data[4] = x.y;
+    viewMatrix.data[5] = y.y;
+    viewMatrix.data[6] = -z.y;
+    viewMatrix.data[7] = 0.0f;
+
+    viewMatrix.data[8] = x.z;
+    viewMatrix.data[9] = y.z;
+    viewMatrix.data[10] = -z.z;
+    viewMatrix.data[11] = 0.0f;
+
+    viewMatrix.data[12] = -Math::Dot(x, position_);
+    viewMatrix.data[13] = -Math::Dot(y, position_);
+    viewMatrix.data[14] = Math::Dot(z, position_);
+    viewMatrix.data[15] = 1.0f;
+
+    return viewMatrix;
 }
 
-Mat4 Camera::GetViewMatrix() const {
-    return Math::lookAt(position, position + front, up);
+void Camera::processKeyboard(int direction, float deltaTime) {
+    float velocity = movementSpeed_ * deltaTime;
+    if (direction == GLFW_KEY_W)
+        position_ = Math::Add(position_, Math::Multiply(front_, velocity));
+    if (direction == GLFW_KEY_S)
+        position_ = Math::Subtract(position_, Math::Multiply(front_, velocity));
+    if (direction == GLFW_KEY_A)
+        position_ = Math::Subtract(position_, Math::Multiply(right_, velocity));
+    if (direction == GLFW_KEY_D)
+        position_ = Math::Add(position_, Math::Multiply(right_, velocity));
+
+    updateCameraVectors();
 }
 
-void Camera::ProcessKeyboard(int direction, float deltaTime) {
-    float velocity = movementSpeed * deltaTime;
-    if (direction & 1) {
-        position += front * velocity;
-    }
-    if (direction & 2) {
-        position -= front * velocity;
-    }
-    if (direction & 4) {
-        position -= right * velocity;
-    }
-    if (direction & 8) {
-        position += right * velocity;
-    }
+void Camera::processMouseScroll(float yOffset)
+{
+
 }
 
-void Camera::ProcessMouseMovement(float xoffset, float yoffset, bool constrainPitch) {
-    xoffset *= mouseSensitivity;
-    yoffset *= mouseSensitivity;
+void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch) {
+    xoffset *= mouseSensitivity_;
+    yoffset *= mouseSensitivity_;
 
-    yaw += xoffset;
-    pitch += yoffset;
+    yaw_ += xoffset;
+    pitch_ += yoffset;
 
     if (constrainPitch) {
-        if (pitch > 89.0f) {
-            pitch = 89.0f;
-        }
-        if (pitch < -89.0f) {
-            pitch = -89.0f;
-        }
+        if (pitch_ > 89.0f)
+            pitch_ = 89.0f;
+        if (pitch_ < -89.0f)
+            pitch_ = -89.0f;
     }
 
-    UpdateCameraVectors();
+    updateCameraVectors();
 }
 
-void Camera::ProcessMouseScroll(float yoffset) {
-    if (zoom >= 1.0f && zoom <= 45.0f) {
-        zoom -= yoffset;
-    }
-    if (zoom <= 1.0f) {
-        zoom = 1.0f;
-    }
-    if (zoom >= 45.0f) {
-        zoom = 45.0f;
-    }
-}
-
-void Camera::UpdateCameraVectors() {
-    Vec3 newFront;
-    newFront.x = cos(Math::ToRadians(yaw)) * cos(Math::ToRadians(pitch));
-    newFront.y = sin(Math::ToRadians(pitch));
-    newFront.z = sin(Math::ToRadians(yaw)) * cos(Math::ToRadians(pitch));
-    front = Math::Normalize(newFront);
-    right = Math::Normalize(Math::Cross(front, worldUp));
-    up = Math::Normalize(Math::Cross(right, front));
+void Camera::updateCameraVectors() {
+    Math::Vec3 front = Math::Vec3{ 0.0f,0.0f,0.0f }; //init
+    front.x = cos(Math::ToRadians(yaw_)) * cos(Math::ToRadians(pitch_));
+    front.y = sin(Math::ToRadians(pitch_));
+    front.z = sin(Math::ToRadians(yaw_)) * cos(Math::ToRadians(pitch_));
+    front_ = Math::Normalise(front);
+    right_ = Math::Normalise(Math::Cross(front_, worldUp_));
+    up_ = Math::Normalise(Math::Cross(right_, front_));
 }
