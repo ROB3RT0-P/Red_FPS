@@ -43,6 +43,9 @@
     <Filter Include="Source Files\Shaders">
       <UniqueIdentifier>{671593b0-8f49-44a0-9402-65d1fddfbf44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{885a7dfb-20ad-4d9f-9393-f9c708d69c71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="red_camera.cpp">
@@ -142,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="red_game.h">
       <Filter>Source Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="red_plane.h">
+      <Filter>Source Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

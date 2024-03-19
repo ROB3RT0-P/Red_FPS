@@ -6,15 +6,15 @@
 #pragma once
 #include "red_includes.h"
 #include "red_camera.h"
+#include "red_plane.h"
 
 
 class Game {
 public:
     Game();
     ~Game();
-    void init();
-   // void update(Camera& camera);
     void terminate();
+    void init();
     void run();
     int getExitCode() const;
 
@@ -24,6 +24,6 @@ private:
 
     Renderer* renderer;
     Camera* camera;
+    Plane* plane;
 
-    GLuint VAO, VBO;
 };

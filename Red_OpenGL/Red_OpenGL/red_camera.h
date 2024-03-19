@@ -32,6 +32,8 @@ private:
 	Math::Vec3 right_;
 	Math::Vec3 worldUp_;
 
+	Math::Vec3 front = Math::Vec3{ 0.0f,0.0f,0.0f }; // RJP - Debugging this.
+
 	void updateCameraVectors();
 
 };

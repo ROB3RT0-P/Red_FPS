@@ -175,6 +175,7 @@
     <ClInclude Include="red_includes.h" />
     <ClInclude Include="red_input.h" />
     <ClInclude Include="red_math.h" />
+    <ClInclude Include="red_plane.h" />
     <ClInclude Include="red_renderer.h" />
     <ClInclude Include="red_shader.h" />
   </ItemGroup>

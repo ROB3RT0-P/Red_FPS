@@ -37,7 +37,7 @@
             // Camera
             // Controls/Input
             // Game
-
+            // Debug Text
         // Non-Priority
             //
 *******************************************/
@@ -48,11 +48,6 @@
 #include "red_renderer.h"
 #include "red_game.h"
 
-#define GLEW_STATIC
-
-// Define window dimensions
-const GLint WIDTH = 800, HEIGHT = 600;
-
 int main() {
     Game game;
 
@@ -60,7 +55,9 @@ int main() {
         return game.getExitCode();
     }
 
+    game.init();
     game.run();
+    game.terminate();
 
     return 0;
 }

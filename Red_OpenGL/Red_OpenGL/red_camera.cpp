@@ -63,14 +63,16 @@ void Camera::processMouseScroll(float yOffset)
 
 }
 
-void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch) {
+void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch) 
+{
     xoffset *= mouseSensitivity_;
     yoffset *= mouseSensitivity_;
 
     yaw_ += xoffset;
     pitch_ += yoffset;
 
-    if (constrainPitch) {
+    if (constrainPitch) 
+    {
         if (pitch_ > 89.0f)
             pitch_ = 89.0f;
         if (pitch_ < -89.0f)
@@ -80,8 +82,9 @@ void Camera::processMouseMovement(float xoffset, float yoffset, GLboolean constr
     updateCameraVectors();
 }
 
-void Camera::updateCameraVectors() {
-    Math::Vec3 front = Math::Vec3{ 0.0f,0.0f,0.0f }; //init
+void Camera::updateCameraVectors() 
+{
+    //Math::Vec3 front = Math::Vec3{ 0.0f,0.0f,0.0f };
     front.x = cos(Math::ToRadians(yaw_)) * cos(Math::ToRadians(pitch_));
     front.y = sin(Math::ToRadians(pitch_));
     front.z = sin(Math::ToRadians(yaw_)) * cos(Math::ToRadians(pitch_));
