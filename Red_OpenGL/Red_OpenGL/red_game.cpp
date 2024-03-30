@@ -61,7 +61,7 @@ void Game::init() {
 
 void Game::run() {
     while (!glfwWindowShouldClose(window)) {
-        float deltaTime = glfwGetTime(); // RJP - testing
+        float deltaTime = glfwGetTime();
         Input::exeMovement(*camera, deltaTime);
 
         Math::Mat4 viewMatrix = camera->getViewMatrix();
