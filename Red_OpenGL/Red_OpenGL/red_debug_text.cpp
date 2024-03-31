@@ -85,8 +85,6 @@ void DebugText::createBuffers() {
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
 }
 
-
-
 GLuint DebugText::loadTextureAtlas(const char* imagePath) {
 
     if (!imagePath)
@@ -139,11 +137,11 @@ void DebugText::renderText(const std::string& text, const Math::Vec3& position, 
     for (char c : text) {
         // Retrieve texture coordinates for the character 'c' from texture atlas
         // Assuming the texture atlas contains characters arranged in a grid
-        const int atlasWidth = 10;  
-        const int atlasHeight = 10; 
-        const int charWidth = 1; 
+        const int atlasWidth = 10;
+        const int atlasHeight = 10;
+        const int charWidth = 1;
         const int charHeight = 1;
-        const int charsPerRow = atlasWidth / charWidth; 
+        const int charsPerRow = atlasWidth / charWidth;
 
         // Calculate the position of the character in the atlas grid
         int charIndex = static_cast<int>(c) - 32; // Assuming ASCII characters start from space character (ASCII 32)
@@ -162,36 +160,36 @@ void DebugText::renderText(const std::string& text, const Math::Vec3& position, 
 
         // Add vertices to the vertices vector
         vertices.push_back(x0); vertices.push_back(y0); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX); vertices.push_back(texY); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX); vertices.push_back(texY); // Texture coordinate
 
         vertices.push_back(x1); vertices.push_back(y0); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX + 1.0f); vertices.push_back(texY); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX + (static_cast<float>(charWidth) / atlasWidth)); vertices.push_back(texY); // Texture coordinate
 
         vertices.push_back(x1); vertices.push_back(y1); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX + 1.0f); vertices.push_back(texY + 1.0f); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX + (static_cast<float>(charWidth) / atlasWidth)); vertices.push_back(texY + (static_cast<float>(charHeight) / atlasHeight)); // Texture coordinate
 
         vertices.push_back(x0); vertices.push_back(y0); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX); vertices.push_back(texY); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX); vertices.push_back(texY); // Texture coordinate
 
         vertices.push_back(x1); vertices.push_back(y1); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX + 1.0f); vertices.push_back(texY + 1.0f); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX + (static_cast<float>(charWidth) / atlasWidth)); vertices.push_back(texY + (static_cast<float>(charHeight) / atlasHeight)); // Texture coordinate
 
         vertices.push_back(x0); vertices.push_back(y1); vertices.push_back(0.0f); // Position
-        vertices.push_back(texX); vertices.push_back(texY + 1.0f); vertices.push_back(0.0f); // Texture coordinate
+        vertices.push_back(texX); vertices.push_back(texY + (static_cast<float>(charHeight) / atlasHeight)); // Texture coordinate
 
         // Advance the position for the next character
         xpos += scale;
     }
 
-    // Bind the VBO and upload vertex data
+    // Upload vertices to VBO
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_DYNAMIC_DRAW);
 
-    // Draw the text
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 6); // 6 vertices per quad
+    // Draw text
+    glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 5); // 5 components per vertex (x, y, z, texX, texY)
 
-    // Clear the vertices vector for the next text rendering
+    // Clear vertices vector
     vertices.clear();
 
-    glBindVertexArray(0); // Unbind VAO
+    glBindVertexArray(0);
 }
