@@ -5,7 +5,10 @@
 
 #include "red_debug_text.h"
 #include "red_includes.h"
+
+#define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+
 
 const char* vertexShaderSource =
 "#version 330 core\n"
@@ -29,16 +32,17 @@ const char* fragmentShaderSource =
 "    FragColor = vec4(textColor * Color, 1.0);\n"
 "}\n\0";
 
-DebugText::DebugText() : vao(0), vbo(0), program(0), posAttrib(0), colAttrib(0) {
-}
+DebugText::DebugText() : vao(0), vbo(0), program(0), posAttrib(0), colAttrib(0) {}
 
-DebugText::~DebugText() {
+DebugText::~DebugText() 
+{
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
     glDeleteProgram(program);
 }
 
-void DebugText::init() {
+void DebugText::init() 
+{
     // Compile shaders
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -67,7 +71,8 @@ void DebugText::init() {
     createBuffers();
 }
 
-void DebugText::createBuffers() {
+void DebugText::createBuffers() 
+{
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
@@ -85,7 +90,8 @@ void DebugText::createBuffers() {
     glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
 }
 
-GLuint DebugText::loadTextureAtlas(const char* imagePath) {
+GLuint DebugText::loadTextureAtlas(const char* imagePath) 
+{
 
     if (!imagePath)
     {
@@ -95,7 +101,8 @@ GLuint DebugText::loadTextureAtlas(const char* imagePath) {
     // Load image using stb_image
     int width, height, channels;
     unsigned char* imageData = stbi_load(imagePath, &width, &height, &channels, STBI_rgb_alpha);
-    if (!imageData) {
+    if (!imageData) 
+    {
         std::cerr << "Failed to load texture atlas image: " << imagePath << std::endl;
         return 0;
     }
@@ -126,7 +133,8 @@ GLuint DebugText::loadTextureAtlas(const char* imagePath) {
     return textureID;
 }
 
-void DebugText::renderText(const std::string& text, const Math::Vec3& position, float scale, const Math::Vec3& color) {
+void DebugText::renderText(const std::string& text, const Math::Vec3& position, float scale, const Math::Vec3& color) 
+{
     glUseProgram(program);
     glUniform3f(glGetUniformLocation(program, "textColor"), color.x, color.y, color.z);
     glBindVertexArray(vao);
@@ -134,7 +142,8 @@ void DebugText::renderText(const std::string& text, const Math::Vec3& position, 
     float xpos = position.x;
     float ypos = position.y;
 
-    for (char c : text) {
+    for (char c : text) 
+    {
         // Retrieve texture coordinates for the character 'c' from texture atlas
         // Assuming the texture atlas contains characters arranged in a grid
         const int atlasWidth = 10;

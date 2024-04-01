@@ -49,15 +49,15 @@
 #include "red_game.h"
 
 int main() {
-    Game game;
+    Game* game = new Game();
 
-    if (game.getExitCode() != 0) {
-        return game.getExitCode();
+    if (game->getExitCode() != 0) {
+        return game->getExitCode();
     }
 
-    game.init();
-    game.run();
-    game.terminate();
+    game->init();
+    game->start();
+    game->terminate();
 
     return 0;
 }

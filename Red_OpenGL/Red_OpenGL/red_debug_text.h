@@ -3,9 +3,6 @@
 #include <string>
 #include "red_includes.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-
 class DebugText {
 public:
     DebugText();
@@ -13,6 +10,7 @@ public:
 
     void init();
     void renderText(const std::string& text, const Math::Vec3& position, float scale, const Math::Vec3& color);
+    GLuint loadTextureAtlas(const char* imagePath);
 
 private:
     GLuint vao, vbo;
@@ -20,7 +18,6 @@ private:
     GLint posAttrib, colAttrib;
     std::vector<float> vertices;
     GLuint textureAtlasID;
-
+    
     void createBuffers();
-    GLuint loadTextureAtlas(const char* imagePath);
 };

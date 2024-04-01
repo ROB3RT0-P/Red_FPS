@@ -5,8 +5,6 @@
 
 #include "red_game.h"
 #include "red_includes.h"
-#include "red_camera.h"
-#include "red_input.h"
 
 const GLint WIDTH = 800, HEIGHT = 600;
 
@@ -44,8 +42,6 @@ Game::~Game() {
     delete renderer;
     delete camera;
 
-
-
     glfwTerminate();
 }
 
@@ -57,11 +53,63 @@ void Game::init() {
     float cameraPitch = 0.0f;
     camera = new Camera(cameraPosition, cameraUp, cameraYaw, cameraPitch);
 
+    // RJP - State Machine for Game States
+    stateMachine = new StateMachine();
+
+    // RJP - Debug Text
+    debugText = new DebugText();
+    debugText->init();
+    const char* atlasDir = ".../Textures/abc_atlas.png";
+    debugText->loadTextureAtlas( atlasDir );
 }
 
-void Game::run() {
-    while (!glfwWindowShouldClose(window)) {
-        float deltaTime = glfwGetTime();
+void Game::start()
+{
+    stateMachine->executeState(this);
+    //stateMachine->setState(GameState::MENU);
+}
+
+void Game::menuRun()
+{
+    while (!glfwWindowShouldClose(window)) 
+    {
+        float deltaTime = static_cast<float>(glfwGetTime());
+
+        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+            glfwSetWindowShouldClose(window, true);
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        renderer->exeShader();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+}
+
+void Game::gameOverRun()
+{
+    while (!glfwWindowShouldClose(window)) 
+    {
+        float deltaTime = static_cast<float>(glfwGetTime());
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        renderer->exeShader();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+}
+
+void Game::gameRun() 
+{
+    while (!glfwWindowShouldClose(window)) 
+    {
+        float deltaTime = static_cast<float>(glfwGetTime());
+
         Input::exeMovement(*camera, deltaTime);
 
         Math::Mat4 viewMatrix = camera->getViewMatrix();
@@ -77,6 +125,11 @@ void Game::run() {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+}
+
+void Game::pauseRun()
+{
+
 }
 
 void Game::terminate()
