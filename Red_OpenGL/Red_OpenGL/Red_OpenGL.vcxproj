@@ -162,12 +162,14 @@
     <ClCompile Include="red_renderer.cpp" />
     <ClCompile Include="red_shader.cpp" />
     <ClCompile Include="red_sound.cpp" />
+    <ClCompile Include="red_state_machine.cpp" />
     <ClCompile Include="red_texture.cpp" />
     <ClCompile Include="red_time.cpp" />
     <ClCompile Include="red_ui_manager.cpp" />
     <ClCompile Include="red_weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="red_debug_text.h" />
     <ClInclude Include="red_game.h" />
     <ClInclude Include="glew.h" />
     <ClInclude Include="glfw3.h" />
@@ -178,6 +180,8 @@
     <ClInclude Include="red_plane.h" />
     <ClInclude Include="red_renderer.h" />
     <ClInclude Include="red_shader.h" />
+    <ClInclude Include="red_state_machine.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\red_fragment_shader.glsl" />

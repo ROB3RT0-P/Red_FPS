@@ -69,3 +69,15 @@ void Input::exeMovement(Camera& camera, float deltaTime)
         std::cout << "Right";
     }
 }
+
+int Input::handleInput()
+{
+    for (int key : {GLFW_KEY_ENTER, GLFW_KEY_ESCAPE})
+    {
+        if (keys[key])
+        {
+            return key == GLFW_KEY_ENTER ? 1 : 2;
+        }
+    }
+    return 0;
+}

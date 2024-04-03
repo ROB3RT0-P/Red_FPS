@@ -6,19 +6,21 @@
 #include "red_state_machine.h"
 #include "red_game.h"
 
-void StateMachine::executeState(Game* game) {
-    switch (currentState) {
-    case GameState::MENU:
-        game->menuRun();
-        break;
-    case GameState::PLAY:
-        game->gameRun();
-        break;
-    case GameState::PAUSE:
-        game->pauseRun();
-        break;
-    case GameState::GAME_OVER:
-        game->gameOverRun();
-        break;
+void StateMachine::executeState(Game* game) 
+{
+    switch (currentState) 
+    {
+        case GameState::MENU:
+            game->menuRun();
+            break;
+        case GameState::PLAY:
+            game->gameRun();
+            break;
+        case GameState::PAUSE:
+            game->pauseRun();
+            break;
+        case GameState::GAME_OVER:
+            game->gameOverRun();
+            break;
     }
 }

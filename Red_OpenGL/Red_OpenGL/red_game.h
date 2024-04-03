@@ -33,6 +33,7 @@ class Game
         Plane* plane;
         DebugText* debugText;
         StateMachine* stateMachine;
+        Input* input;
 
         int exitCode = 0;
 };

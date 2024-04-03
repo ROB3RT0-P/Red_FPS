@@ -20,4 +20,5 @@ public:
     static void setMouseCallback(GLFWwindow* window, Camera& camera);
     static void scrollCallBack(GLFWwindow* window, double xOffset, double yOffset, Camera& camera);
     static void exeMovement(Camera& camera, float deltaTime);
+    static int handleInput();
 };

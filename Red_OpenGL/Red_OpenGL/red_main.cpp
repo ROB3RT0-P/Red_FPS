@@ -55,7 +55,6 @@ int main() {
         return game->getExitCode();
     }
 
-    game->init();
     game->start();
     game->terminate();
 

@@ -36,6 +36,8 @@ Game::Game() {
 
     // RJP - Set GLFW callback functions
     glfwSetKeyCallback(window, Input::keyCallback);
+
+    init();
 }
 
 Game::~Game() {
@@ -66,7 +68,6 @@ void Game::init() {
 void Game::start()
 {
     stateMachine->executeState(this);
-    //stateMachine->setState(GameState::MENU);
 }
 
 void Game::menuRun()
@@ -76,9 +77,16 @@ void Game::menuRun()
         float deltaTime = static_cast<float>(glfwGetTime());
 
         if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        {
             glfwSetWindowShouldClose(window, true);
+        }
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        if (stateMachine->getState() == GameState::MENU && input->handleInput() == 1)
+        {
+            stateMachine->setState(GameState::PLAY);
+        }
+            
+        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         renderer->exeShader();
@@ -135,6 +143,8 @@ void Game::pauseRun()
 void Game::terminate()
 {
     camera = nullptr;
+    stateMachine = nullptr;
+    debugText = nullptr;
 }
  
 int Game::getExitCode() const {
