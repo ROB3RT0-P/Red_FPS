@@ -6,7 +6,7 @@
 #include "red_state_machine.h"
 #include "red_game.h"
 
-void StateMachine::executeState(Game* game) 
+void StateMachine::executeState(Game* game, float deltaTime) 
 {
     switch (currentState) 
     {
@@ -14,7 +14,7 @@ void StateMachine::executeState(Game* game)
             game->menuRun();
             break;
         case GameState::PLAY:
-            game->gameRun();
+            game->gameRun( deltaTime );
             break;
         case GameState::PAUSE:
             game->pauseRun();

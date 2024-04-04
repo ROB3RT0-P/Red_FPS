@@ -43,7 +43,8 @@ Game::Game() {
 Game::~Game() {
     delete renderer;
     delete camera;
-
+    delete debugText;
+    delete stateMachine;
     glfwTerminate();
 }
 
@@ -57,6 +58,7 @@ void Game::init() {
 
     // RJP - State Machine for Game States
     stateMachine = new StateMachine();
+    stateMachine->setState(GameState::MENU);
 
     // RJP - Debug Text
     debugText = new DebugText();
@@ -67,84 +69,92 @@ void Game::init() {
 
 void Game::start()
 {
-    stateMachine->executeState(this);
+   
+}
+
+void Game::update()
+{
+    float deltaTime = static_cast<float>(glfwGetTime());
+
+    // RJP - Game Loop
+    while (!glfwWindowShouldClose(window)) 
+    {
+        stateMachine->executeState(this, deltaTime);
+    }
 }
 
 void Game::menuRun()
 {
-    while (!glfwWindowShouldClose(window)) 
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
-        float deltaTime = static_cast<float>(glfwGetTime());
+        glfwSetWindowShouldClose(window, true);
+    }
 
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        {
-            glfwSetWindowShouldClose(window, true);
-        }
-
-        if (stateMachine->getState() == GameState::MENU && input->handleInput() == 1)
-        {
-            stateMachine->setState(GameState::PLAY);
-        }
+    if (stateMachine->getState() == GameState::MENU && input->handleInput() == 1)
+    {
+        stateMachine->setState(GameState::PLAY);
+    }
             
-        glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-        renderer->exeShader();
+    renderer->exeShader();
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
-void Game::gameOverRun()
+void Game::gameRun(float deltaTime) 
 {
-    while (!glfwWindowShouldClose(window)) 
+    if (stateMachine->getState() == GameState::PLAY && input->handleInput() == 1)
     {
-        float deltaTime = static_cast<float>(glfwGetTime());
-
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        renderer->exeShader();
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        stateMachine->setState(GameState::PAUSE);
     }
-}
 
-void Game::gameRun() 
-{
-    while (!glfwWindowShouldClose(window)) 
-    {
-        float deltaTime = static_cast<float>(glfwGetTime());
+    Input::exeMovement(*camera, deltaTime);
 
-        Input::exeMovement(*camera, deltaTime);
+    Math::Mat4 viewMatrix = camera->getViewMatrix();
 
-        Math::Mat4 viewMatrix = camera->getViewMatrix();
+    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-        if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            glfwSetWindowShouldClose(window, true);
+    renderer->exeShader();
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        renderer->exeShader();
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
 void Game::pauseRun()
 {
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 
+    if (stateMachine->getState() == GameState::PAUSE && input->handleInput() == 2)
+    {
+        exitCode = 1;
+    }
+
+    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+void Game::gameOverRun()
+{
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    renderer->exeShader();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
 }
 
 void Game::terminate()
 {
-    camera = nullptr;
-    stateMachine = nullptr;
-    debugText = nullptr;
+
 }
  
 int Game::getExitCode() const {

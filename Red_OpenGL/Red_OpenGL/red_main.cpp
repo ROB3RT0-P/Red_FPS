@@ -56,6 +56,7 @@ int main() {
     }
 
     game->start();
+    game->update();
     game->terminate();
 
     return 0;

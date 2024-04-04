@@ -29,5 +29,5 @@ public:
         return currentState;
     }
 
-    void executeState(Game* game);
+    void executeState(Game* game, float deltaTime);
 };

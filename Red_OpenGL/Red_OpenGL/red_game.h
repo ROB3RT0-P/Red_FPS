@@ -20,7 +20,8 @@ class Game
         void terminate();
         void init();
         void start();
-        void gameRun();
+        void update();
+        void gameRun( float deltaTime );
         void menuRun();
         void pauseRun();
         void gameOverRun();
