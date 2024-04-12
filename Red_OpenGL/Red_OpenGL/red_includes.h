@@ -8,9 +8,8 @@
 #include "glew.h"
 #include <GLFW/glfw3.h>
 #include "red_math.h"
-#include "red_renderer.h"
 #include "red_shader.h"
-
+#include "red_renderer.h"
 #include <vector>
 #include <string>
 #include <fstream>

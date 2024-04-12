@@ -6,9 +6,13 @@
 #include "red_game.h"
 #include "red_includes.h"
 
+// RJP - Game Objects
+#include "red_plane.h"
+
 const GLint WIDTH = 800, HEIGHT = 600;
 
-Game::Game() {
+Game::Game() 
+{
     if (!glfwInit()) {
         exitCode = -1;
         return;
@@ -32,39 +36,41 @@ Game::Game() {
         return;
     }
 
-    renderer = new Renderer("Shaders/red_vertex_shader.glsl", "Shaders/red_fragment_shader.glsl");
-
+    renderer = std::make_unique<Renderer>("Shaders/red_vertex_shader.glsl", "Shaders/red_fragment_shader.glsl");
+    
     // RJP - Set GLFW callback functions
     glfwSetKeyCallback(window, Input::keyCallback);
 
     init();
 }
 
-Game::~Game() {
-    delete renderer;
-    delete camera;
-    delete debugText;
-    delete stateMachine;
+Game::~Game() 
+{
     glfwTerminate();
 }
 
-void Game::init() {
+void Game::init() 
+{
     // RJP - Create a camera
     Math::Vec3 cameraPosition(0.0f, 0.0f, 3.0f);
     Math::Vec3 cameraUp(0.0f, 1.0f, 0.0f);
     float cameraYaw = -90.0f;
     float cameraPitch = 0.0f;
-    camera = new Camera(cameraPosition, cameraUp, cameraYaw, cameraPitch);
+    camera = std::make_unique<Camera>(cameraPosition, cameraUp, cameraYaw, cameraPitch);
 
     // RJP - State Machine for Game States
-    stateMachine = new StateMachine();
+    stateMachine = std::make_unique<StateMachine>();
     stateMachine->setState(GameState::MENU);
 
     // RJP - Debug Text
-    debugText = new DebugText();
+    debugText = std::make_unique<DebugText>();
     debugText->init();
     const char* atlasDir = ".../Textures/abc_atlas.png";
     debugText->loadTextureAtlas( atlasDir );
+
+    // RJP - Plane
+    plane = std::make_unique<Plane>();
+    plane->init();
 }
 
 void Game::start()
@@ -115,6 +121,7 @@ void Game::gameRun(float deltaTime)
 
     Math::Mat4 viewMatrix = camera->getViewMatrix();
 
+    //plane->render();
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 

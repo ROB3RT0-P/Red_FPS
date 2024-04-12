@@ -29,12 +29,13 @@ class Game
     
     private:
         GLFWwindow* window;
-        Renderer* renderer;
-        Camera* camera;
-        Plane* plane;
-        DebugText* debugText;
-        StateMachine* stateMachine;
-        Input* input;
+
+        std::unique_ptr<Renderer> renderer;
+        std::unique_ptr<Camera> camera;
+        std::unique_ptr<DebugText> debugText;
+        std::unique_ptr<StateMachine> stateMachine;
+        std::unique_ptr<Input> input;
+        std::unique_ptr<Plane> plane;
 
         int exitCode = 0;
 };

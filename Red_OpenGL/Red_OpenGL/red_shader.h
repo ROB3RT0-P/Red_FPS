@@ -7,8 +7,6 @@
 
 #include "red_includes.h"
 
-#pragma once
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -17,7 +15,10 @@
 
 class ShaderProgram {
 public:
+    ShaderProgram();
     ShaderProgram(const char* vertexPath, const char* fragmentPath);
+    ~ShaderProgram();
+
     void use() const;
     void setBool(const std::string& name, bool value) const;
     void setInt(const std::string& name, int value) const;

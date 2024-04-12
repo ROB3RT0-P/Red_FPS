@@ -158,6 +158,7 @@
     <ClCompile Include="red_math.cpp" />
     <ClCompile Include="red_model.cpp" />
     <ClCompile Include="red_physics_engine.cpp" />
+    <ClCompile Include="red_plane.cpp" />
     <ClCompile Include="red_player.cpp" />
     <ClCompile Include="red_renderer.cpp" />
     <ClCompile Include="red_shader.cpp" />

@@ -5,7 +5,8 @@
 
 #include "red_shader.h"
 
-ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath) {
+ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath) 
+{
     // Read shader files
     std::string vertexCode;
     std::string fragmentCode;
@@ -67,35 +68,47 @@ ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath) {
     glDeleteShader(fragment);
 }
 
-void ShaderProgram::use() const {
+ShaderProgram::~ShaderProgram() 
+{
+    glDeleteProgram(ID);
+}
+
+void ShaderProgram::use() const 
+{
     glUseProgram(ID);
 }
 
-void ShaderProgram::setBool(const std::string& name, bool value) const {
+void ShaderProgram::setBool(const std::string& name, bool value) const 
+{
     glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
 }
 
-void ShaderProgram::setInt(const std::string& name, int value) const {
+void ShaderProgram::setInt(const std::string& name, int value) const 
+{
     glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
 }
 
-void ShaderProgram::setFloat(const std::string& name, float value) const {
+void ShaderProgram::setFloat(const std::string& name, float value) const 
+{
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
 }
 
 void ShaderProgram::checkCompileErrors(GLuint shader, const std::string& type) {
     GLint success;
     GLchar infoLog[1024];
-    if (type != "PROGRAM") {
+    if (type != "PROGRAM") 
+    {
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-        if (!success) {
+        if (!success) 
+        {
             glGetShaderInfoLog(shader, 1024, nullptr, infoLog);
             std::cerr << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
         }
     }
     else {
         glGetProgramiv(shader, GL_LINK_STATUS, &success);
-        if (!success) {
+        if (!success) 
+        {
             glGetProgramInfoLog(shader, 1024, nullptr, infoLog);
             std::cerr << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n" << infoLog << "\n -- --------------------------------------------------- -- " << std::endl;
         }

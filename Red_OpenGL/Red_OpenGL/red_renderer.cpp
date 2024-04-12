@@ -5,7 +5,7 @@
 
 #include "red_renderer.h"
 
-Renderer::Renderer(const char* vertexPath, const char* fragmentPath)
+Renderer::Renderer(const char* vertexPath, const char* fragmentPath) : programID(0)
 {
     std::string vertexCode;
     std::string fragmentCode;
@@ -71,7 +71,7 @@ Renderer::Renderer(const char* vertexPath, const char* fragmentPath)
 
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
-    }
+    }                                 
 }
 
 Renderer::~Renderer()
@@ -79,7 +79,7 @@ Renderer::~Renderer()
     glDeleteProgram(programID);
 }
 
-void Renderer::exeShader()
+void Renderer::exeShader() const
 {
     glUseProgram(programID);
 }
